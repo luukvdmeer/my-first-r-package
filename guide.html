@@ -386,7 +386,7 @@ Warning
 </section>
 <section id="release-your-package" class="level3">
 <h3 class="anchored" data-anchor-id="release-your-package">7. Release your package</h3>
-<p>The time is there: release your package on GitHub. If you have commited all changes at every step already, the only thing left to do it run the following line in the <em>Terminal</em>:</p>
+<p>The time is there: release your package on GitHub. If you have committed all changes at every step already, the only thing left to do it run the following line in the <em>Terminal</em>:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This will push all committed work to the main branch of your GitHub repository. Now other people can install your package from there using <code>install_github()</code>. Done!</p>
 </section>
@@ -395,8 +395,8 @@ Warning
 <p>Too easy for you? Here are some additional tasks to make your package better.</p>
 <section id="add-dependencies" class="level4">
 <h4 class="anchored" data-anchor-id="add-dependencies">8.1 Add dependencies</h4>
-<p>The first <code>hello()</code> function was so simple that we did not need to depend on any other R package. But now, you want to spice up your package and include emojis in your greeting. This can be done using the <a href="">emoji</a> package.</p>
-<p>In the <code>DESCRIPTION</code> file, you need to specify that your package depends on the emoji package by adding an <code>Imports</code> field as follows. This will also install the dependency when installing your package.</p>
+<p>The first <code>hello()</code> function was so simple that we did not need to depend on any other R package. But now, you want to spice up your package and include emoticons in your greeting. This can be done using the <a href="https://github.com/EmilHvitfeldt/emoji">emoji</a> package.</p>
+<p>In the <code>DESCRIPTION</code> file, you need to specify that your package depends on the <code>emoji</code> package by adding an <code>Imports</code> field as follows. This will also install the dependency when installing your package.</p>
 <pre><code>Imports:
   - emoji</code></pre>
 <p>When writing functions, you will never use <code>library()</code> calls. Instead, you will specify in the function documentation which functions to import, and then call them directly in your function code. We do that through a <code>@importFrom</code> statement, an specify both the package name and the function name (which in this case are the same).</p>
@@ -420,15 +420,43 @@ Warning
 </section>
 <section id="write-unit-tests" class="level4">
 <h4 class="anchored" data-anchor-id="write-unit-tests">8.2 Write unit tests</h4>
+<p>It is good practice to write formal tests for your code, to make sure it behaves as expected in every possible situation. The best way to find bugs it too write many small tests, which each test a small unit of your code. This is called <em>unit testing</em>. The R package <code>testthat</code> (part of <code>devtools</code>) makes it much easier to do this.</p>
+<p>Set up the test structure by calling:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_testthat</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Create a test file for the <code>hello()</code> function:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_test</span>(<span class="st">"hello"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The created file contains an example test. Modify the file with an actual test for <code>hello()</code>, using the functions supplied by <code>testthat</code>. An example could be that you test if the output of the <code>hello()</code> function is indeed a character.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">test_that</span>(<span class="st">"output is character"</span>, {</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect_type</span>(<span class="fu">hello</span>(), <span class="st">"character"</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To run only your tests (without the other checks), use <code>test()</code>.</p>
+<p>See <a href="https://r-pkgs.org/testing-basics.html">here</a> for more information on testing for R packages.</p>
 </section>
 <section id="write-user-guides" class="level4">
 <h4 class="anchored" data-anchor-id="write-user-guides">8.3 Write user guides</h4>
+<p>Function documentation is very brief and formal. To explain more details of the package, or to present actual use-cases, you often want to write more readable, extensive documentation in the form of user guides. In R, these are called <em>package vignettes</em>.</p>
+<p>Set up the vignette structure by calling:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_vignette</span>(<span class="st">"filename-of-the-vignette"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This will create a template for you. You can fill the content of the vignette using <code>RMarkdown</code> formatting. Regular text is written in Markdown, and chunks of R code can be integrated in it, and will be evaluated when building the document.</p>
+<p>See <a href="https://r-pkgs.org/vignettes.html">here</a> for more information on writing package vignettes.</p>
 </section>
 <section id="use-github-actions" class="level4">
 <h4 class="anchored" data-anchor-id="use-github-actions">8.4 Use GitHub Actions</h4>
+<p>Before pushing to GitHub, you should always run the package checks. Instead of doing this yourself (and remembering to do it..), you can also automate this process using GitHub Actions. By adding a specific GitHub Actions workflow to your repository, this will trigger the checks whenever you push your work to GitHub.</p>
+<p>The following function will create this workflow for you:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_github_action</span>(<span class="st">"check-standard"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="create-a-package-website" class="level4">
 <h4 class="anchored" data-anchor-id="create-a-package-website">8.5 Create a package website</h4>
+<p>In the meantime you created a lot of package documentation and metadata. For users, it is great if they can easily read all of this on a dedicated package website. This sounds like a lot of work, but in R, this is luckily very easy to do with the <code>pkgdown</code> package.</p>
+<p>Set up the website structure by calling:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_pkgdown</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Build and preview your website locally as follows. Of course, this is a very simple version of it, there are many ways to customize it later.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pkgdown)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">build_site</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The best practice is to not push the website build to GitHub, but deploy it on GitHub pages when pushing to GitHub, using a dedicated GitHub Actions workflow. The following function implements the GitHub setup needed to automatically publish your website to GitHub pages at every push:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_pkgdown_github_pages</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>See <a href="https://r-pkgs.org/website.html">here</a> for more information on creating pkgdown websites.</p>
 </section>
 </section>
 </section>
@@ -436,15 +464,15 @@ Warning
 <h2 class="anchored" data-anchor-id="install-others-packages">Install other’s packages</h2>
 <p>You wrote and released your package. Other people in the workshop did that too. Now it is time to install the packages of the others, and see what they have to offer.</p>
 <p>Install as follows:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install_github</span>(<span class="st">"theirusername/my-first-r-package"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install_github</span>(<span class="st">"theirusername/my-first-r-package"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Then load the installed package:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(theirpackagename)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(theirpackagename)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Then check the metadata of the package and a list of the functions it contains:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="at">help =</span> theirpackagename)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="at">help =</span> theirpackagename)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Then check the documentation of a specific function:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>?theirfunction</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>?theirfunction</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Finally, call the function! Potentially with some arguments.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">theirfunction</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">theirfunction</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 
 </main>
