@@ -267,7 +267,7 @@ Warning
 </section>
 <section id="write-a-function" class="level3">
 <h3 class="anchored" data-anchor-id="write-a-function">2. Write a function</h3>
-<p>Time to write a function. Open a new, blank R script. Your first function could print a message saying hello to your user.</p>
+<p>Time to write a function. Open a new, blank R script. Your first function could print a message saying hello to your user. But you can choose something different as well, be creative!</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>hello <span class="ot">=</span> <span class="cf">function</span>(<span class="at">name =</span> <span class="st">"world"</span>) {</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">"Hello "</span>, name, <span class="st">"! Welcome to my first R package!"</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -338,7 +338,7 @@ Warning
 <section id="add-a-license" class="level3">
 <h3 class="anchored" data-anchor-id="add-a-license">4. Add a license</h3>
 <p>Now your package contains actual code, it is time to think about the license under which you want to release your package. Every released open-source project <strong>should have a license!</strong>. Without a license, the default copyright laws apply, meaning that you retain all rights to your source code and no one may reproduce, distribute, or create derivative works from your work. Also, a license specifies that the software is released without any kind of warranty. Your are basically telling people: “Do with it what you want, but don’t sue me if anything goes wrong!”. Many licenses will also require people to attribute you once they copy parts of your code.</p>
-<p>There are different types of open-source licenses, learn more about them <a href="https://r-pkgs.org/license.html">here</a>. I usually prefer a permissive license, without too many restrictions. Popular license in this category include the MIT license and the Apache 2.0 license.</p>
+<p>There are different types of open-source licenses, learn more about them <a href="https://r-pkgs.org/license.html">here</a>. I usually prefer a permissive license, without too many restrictions. Popular licenses in this category include the MIT license and the Apache 2.0 license.</p>
 <p>On <a href="https://choosealicense.com/licenses/">this page</a> you find an overview of most licenses, and when you click on them, it also tells you how to apply this license to your work. In most cases, this simply comes down to including a file <code>LICENSE.md</code> in the root of your directory, containing the license text. For an R package, you also need to specify the license in the <code>DESCRIPTION</code> file.</p>
 <p>Use the <code>use_apache_license()</code> function to apply the Apache 2.0 license to your work.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_apache_license</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -399,7 +399,7 @@ Warning
 <p>In the <code>DESCRIPTION</code> file, you need to specify that your package depends on the <code>emoji</code> package by adding an <code>Imports</code> field as follows. This will also install the dependency when installing your package.</p>
 <pre><code>Imports:
   - emoji</code></pre>
-<p>When writing functions, you will never use <code>library()</code> calls. Instead, you will specify in the function documentation which functions to import, and then call them directly in your function code. We do that through a <code>@importFrom</code> statement, an specify both the package name and the function name (which in this case are the same).</p>
+<p>When writing package functions in R, you will never use <code>library()</code> calls inside your scripts. Instead, you will specify in the function documentation which functions to import, and then call them directly in your function code. We do that through a <code>@importFrom</code> statement, an specify both the package name and the function name (which in this case are the same).</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' Say hello</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#' This function says hello to the user.</span></span>
@@ -456,7 +456,7 @@ Warning
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">build_site</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The best practice is to not push the website build to GitHub, but deploy it on GitHub pages when pushing to GitHub, using a dedicated GitHub Actions workflow. The following function implements the GitHub setup needed to automatically publish your website to GitHub pages at every push:</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">use_pkgdown_github_pages</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>See <a href="https://r-pkgs.org/website.html">here</a> for more information on creating pkgdown websites.</p>
+<p>See <a href="https://r-pkgs.org/website.html">here</a> for more information on creating and customizing pkgdown websites.</p>
 </section>
 </section>
 </section>

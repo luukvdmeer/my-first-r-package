@@ -143,7 +143,7 @@ Don't forget to commit your changes to git!
 
 ### 2. Write a function
 
-Time to write a function. Open a new, blank R script. Your first function could print a message saying hello to your user.
+Time to write a function. Open a new, blank R script. Your first function could print a message saying hello to your user. But you can choose something different as well, be creative!
 
 ```r
 hello = function(name = "world") {
@@ -203,7 +203,7 @@ Don't forget to commit your changes to git!
 
 Now your package contains actual code, it is time to think about the license under which you want to release your package. Every released open-source project **should have a license!**. Without a license, the default copyright laws apply, meaning that you retain all rights to your source code and no one may reproduce, distribute, or create derivative works from your work. Also, a license specifies that the software is released without any kind of warranty. Your are basically telling people: "Do with it what you want, but don't sue me if anything goes wrong!". Many licenses will also require people to attribute you once they copy parts of your code.
 
-There are different types of open-source licenses, learn more about them [here](https://r-pkgs.org/license.html). I usually prefer a permissive license, without too many restrictions. Popular license in this category include the MIT license and the Apache 2.0 license.
+There are different types of open-source licenses, learn more about them [here](https://r-pkgs.org/license.html). I usually prefer a permissive license, without too many restrictions. Popular licenses in this category include the MIT license and the Apache 2.0 license.
 
 On [this page](https://choosealicense.com/licenses/) you find an overview of most licenses, and when you click on them, it also tells you how to apply this license to your work. In most cases, this simply comes down to including a file `LICENSE.md` in the root of your directory, containing the license text. For an R package, you also need to specify the license in the `DESCRIPTION` file.
 
@@ -280,7 +280,7 @@ Imports:
   - emoji
 ```
 
-When writing functions, you will never use `library()` calls. Instead, you will specify in the function documentation which functions to import, and then call them directly in your function code. We do that through a `@importFrom` statement, an specify both the package name and the function name (which in this case are the same).
+When writing package functions in R, you will never use `library()` calls inside your scripts. Instead, you will specify in the function documentation which functions to import, and then call them directly in your function code. We do that through a `@importFrom` statement, an specify both the package name and the function name (which in this case are the same).
 
 ```r
 #' Say hello
@@ -377,7 +377,7 @@ The best practice is to not push the website build to GitHub, but deploy it on G
 use_pkgdown_github_pages()
 ```
 
-See [here](https://r-pkgs.org/website.html) for more information on creating pkgdown websites.
+See [here](https://r-pkgs.org/website.html) for more information on creating and customizing pkgdown websites.
 
 ## Install other's packages
 
