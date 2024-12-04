@@ -23,7 +23,7 @@ If you did not manage to prepare your environment in advance or you find it too 
 
 #### Install R, RStudio and Git
 
-Guidelines to install R, RStudio an Git are listed below:
+Guidelines to install R, RStudio and Git are listed below:
 
 - [R](https://cran.r-project.org/)
 - [RStudio](https://posit.co/download/rstudio-desktop/)
@@ -62,7 +62,7 @@ In your forked repository, click on the green button called "Code", go to the "C
 
 ![](img/create.png)
 
-A new tab will open where your Codespace will start setting-up. The process may take a few minutes.
+A new tab will open where your Codespace will start setting-up. The process may take a few minutes. Once, done you will see a Visual Studio Code environment. If you like, you can do your work in there. However, we recommend using RStudio as an development environment instead, and the steps in this workshop are described for RStudio rather than for VSCode.
 
 #### Launch RStudio
 
@@ -121,8 +121,8 @@ You will see that the following files are created:
 
 - `DESCRIPTION`: This file contains important metadata that defines your package. We will need to fill some of its fields afterwards.
 - `NAMESPACE`: This file lists the R objects that are exported from your package to be used by others, or imported from other packages to be used internally. Normally, you will not create or edit this file by hand, but let `devtools` do this for you. For now, the file will be empty, since we do not have any functions yet.
-- `.RBuildignore`: This file lists all files that are in the repository but should not be included when building the actual package. 
-- `.gitignore`: This file lists all files that are in the repository but should not be ignored by the version control of git, and not be pushed to GitHub.
+- `.RBuildignore`: This file lists common files that are in a R package repository but should not be included when building the actual package.
+- `.gitignore`: This file lists common files that are in a R package repository but should be ignored by the version control of git, and not be pushed to GitHub.
 - `my-first-r-package.Rproj`: This file makes the directory an [RStudio Project](https://r4ds.hadley.nz/workflow-scripts#rstudio-projects).
 
 Also, an empty directory `R/` is created. This is where you will store the R files with the functions of your package.
@@ -135,7 +135,7 @@ There are two things we need to do at this point to finalize our setup:
 
 1. Edit the `DESCRIPTION` file. In the `Package` field, give your package a name that is different from `my-first-r-package`. I suggest that for this toy package you use your first name followed by an r, in my case `luukr`. In the `Title` field, write a one line description of your package. In the `Description` field, write a slightly longer description of what your package does. Finally, in the `Authors@R` field, declare yourself the author of the package.
 
-2. Edit the `.RBuildignore` file. Our repository contains the `.devcontainer` directory to store the configuration files for GitHub codespaces, and the `.devguide` directory to store the notebook you are currently reading. These are not files that should be in our package once it gets build. Add the lines `^\.devcontainer$` and `^\.devguide$` to make sure they are ignored during package building.
+2. Edit the `.RBuildignore` file. Our repository contains the `.devcontainer` directory to store the configuration files for GitHub codespaces. These are not files that should be in our package once it gets build. Add the line `^\.devcontainer$` to make sure they are ignored during package building.
 
 ::: {.callout-warning}
 Don't forget to commit your changes to git!

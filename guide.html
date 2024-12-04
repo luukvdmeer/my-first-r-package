@@ -134,7 +134,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="working-locally">1. Working locally</h3>
 <section id="install-r-rstudio-and-git" class="level4">
 <h4 class="anchored" data-anchor-id="install-r-rstudio-and-git">Install R, RStudio and Git</h4>
-<p>Guidelines to install R, RStudio an Git are listed below:</p>
+<p>Guidelines to install R, RStudio and Git are listed below:</p>
 <ul>
 <li><a href="https://cran.r-project.org/">R</a></li>
 <li><a href="https://posit.co/download/rstudio-desktop/">RStudio</a></li>
@@ -168,7 +168,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="img/fork.png" class="img-fluid"></p>
 <p>In your forked repository, click on the green button called “Code”, go to the “Codespaces” tab and click on “Create codespace on main”.</p>
 <p><img src="img/create.png" class="img-fluid"></p>
-<p>A new tab will open where your Codespace will start setting-up. The process may take a few minutes.</p>
+<p>A new tab will open where your Codespace will start setting-up. The process may take a few minutes. Once, done you will see a Visual Studio Code environment. If you like, you can do your work in there. However, we recommend using RStudio as an development environment instead, and the steps in this workshop are described for RStudio rather than for VSCode.</p>
 </section>
 <section id="launch-rstudio" class="level4">
 <h4 class="anchored" data-anchor-id="launch-rstudio">Launch RStudio</h4>
@@ -228,8 +228,8 @@ Note
 <ul>
 <li><code>DESCRIPTION</code>: This file contains important metadata that defines your package. We will need to fill some of its fields afterwards.</li>
 <li><code>NAMESPACE</code>: This file lists the R objects that are exported from your package to be used by others, or imported from other packages to be used internally. Normally, you will not create or edit this file by hand, but let <code>devtools</code> do this for you. For now, the file will be empty, since we do not have any functions yet.</li>
-<li><code>.RBuildignore</code>: This file lists all files that are in the repository but should not be included when building the actual package.</li>
-<li><code>.gitignore</code>: This file lists all files that are in the repository but should not be ignored by the version control of git, and not be pushed to GitHub.</li>
+<li><code>.RBuildignore</code>: This file lists common files that are in a R package repository but should not be included when building the actual package.</li>
+<li><code>.gitignore</code>: This file lists common files that are in a R package repository but should be ignored by the version control of git, and not be pushed to GitHub.</li>
 <li><code>my-first-r-package.Rproj</code>: This file makes the directory an <a href="https://r4ds.hadley.nz/workflow-scripts#rstudio-projects">RStudio Project</a>.</li>
 </ul>
 <p>Also, an empty directory <code>R/</code> is created. This is where you will store the R files with the functions of your package.</p>
@@ -249,7 +249,7 @@ Note
 <p>There are two things we need to do at this point to finalize our setup:</p>
 <ol type="1">
 <li><p>Edit the <code>DESCRIPTION</code> file. In the <code>Package</code> field, give your package a name that is different from <code>my-first-r-package</code>. I suggest that for this toy package you use your first name followed by an r, in my case <code>luukr</code>. In the <code>Title</code> field, write a one line description of your package. In the <code>Description</code> field, write a slightly longer description of what your package does. Finally, in the <code>Authors@R</code> field, declare yourself the author of the package.</p></li>
-<li><p>Edit the <code>.RBuildignore</code> file. Our repository contains the <code>.devcontainer</code> directory to store the configuration files for GitHub codespaces, and the <code>.devguide</code> directory to store the notebook you are currently reading. These are not files that should be in our package once it gets build. Add the lines <code>^\.devcontainer$</code> and <code>^\.devguide$</code> to make sure they are ignored during package building.</p></li>
+<li><p>Edit the <code>.RBuildignore</code> file. Our repository contains the <code>.devcontainer</code> directory to store the configuration files for GitHub codespaces. These are not files that should be in our package once it gets build. Add the line <code>^\.devcontainer$</code> to make sure they are ignored during package building.</p></li>
 </ol>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
